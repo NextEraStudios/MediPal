@@ -1,0 +1,289 @@
+body {
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 300; /* Default to lighter font */
+    color: #374151; /* gray-700, slightly darker for better contrast with light fonts */
+}
+
+/* Override font weight for specific elements that need to be bolder */
+h1, h2, h3, h4, h5, h6, .font-medium, .font-semibold, .font-bold {
+    font-weight: initial; /* Reset first, then apply Tailwind class or specific weight */
+}
+.font-medium { font-weight: 500; }
+.font-semibold { font-weight: 600; }
+.font-bold { font-weight: 700; }
+
+
+/* Active state for sidebar links */
+.sidebar-link.active-link {
+    background-color: #EDE9FE; /* Tailwind's purple-100 */
+    color: #8B5CF6; /* Tailwind's purple-500 */
+    font-weight: 500; /* medium */
+}
+
+.sidebar-link.active-link svg {
+    color: #8B5CF6; /* Tailwind's purple-500 */
+    stroke-width: 2; /* Make active icon slightly bolder */
+}
+
+/* Upgrade to PRO card gradient background */
+.upgrade-pro-card {
+    background-color: #7e22ce; /* purple-700 as base */
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px), /* Slightly more visible grid */
+        linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+        linear-gradient(to right, #a855f7, #e879f9); /* purple-500 to fuchsia-400 - brighter pink */
+    background-size: 25px 25px, 25px 25px, cover; /* Grid size and cover for gradient */
+    border-radius: 0.75rem; /* rounded-xl */
+}
+.upgrade-pro-card h4 {
+    font-weight: 600; /* semibold */
+}
+.upgrade-pro-card p {
+    font-weight: 300; /* light */
+}
+.upgrade-pro-card a {
+    font-weight: 500; /* medium */
+}
+
+
+/* Main content area subtle background effect (pinkish hue at edges) */
+.main-content-bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    background: radial-gradient(ellipse at center,
+        rgba(255, 255, 255, 0) 50%, /* Larger transparent center */
+        rgba(244, 114, 182, 0.02) 75%, /* Very subtle pink-400 with low opacity */
+        rgba(236, 72, 153, 0.04) 100% /* Subtle pink-500 at the very edges */
+    );
+    z-index: 0; /* Ensure it's behind content */
+}
+
+/* Suggestion card styling */
+.suggestion-card {
+    background-color: rgba(249, 250, 251, 0.7); /* Tailwind gray-50 with opacity */
+    /* Subtle gradient like Valerio.ai cards */
+    background-image: linear-gradient(135deg, rgba(233, 213, 255, 0.2) 0%, rgba(250, 232, 255, 0.3) 100%);
+    border: 1px solid rgba(229, 231, 235, 0.6); /* Tailwind gray-200 with opacity */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03), 0 1px 3px rgba(0,0,0,0.02); /* Softer shadow */
+    transition: all 0.3s ease-in-out;
+}
+.suggestion-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05), 0 2px 5px rgba(0,0,0,0.03);
+}
+.suggestion-card h3 {
+    font-weight: 500; /* medium */
+    color: #1f2937; /* gray-800 */
+}
+.suggestion-card p {
+    font-weight: 300; /* light */
+    color: #4b5563; /* gray-600 */
+}
+
+/* Suggestion card icon container */
+.suggestion-icon-container {
+    box-shadow: 0 2px 8px rgba(168, 85, 247, 0.15); /* Subtle shadow matching icon color theme */
+    transition: all 0.3s ease-in-out;
+}
+.suggestion-card:hover .suggestion-icon-container {
+    box-shadow: 0 4px 12px rgba(168, 85, 247, 0.2);
+}
+
+
+/* Custom scrollbar for webkit browsers - already in HTML, but can be here too */
+/*
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background: #c7c7c7;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #a3a3a3;
+}
+*/
+
+/* Ensure input bar container is truly sticky at the bottom of its parent */
+#symptom-input-bar-container {
+    position: sticky;
+    bottom: 0;
+    /* background-color: rgba(255, 255, 255, 0.9); /* White with slight transparency */
+    /* backdrop-filter: blur(5px); /* Frosted glass effect */
+    /* padding-top: 1.5rem; /* 24px */
+    /* padding-bottom: 0.5rem; /* 8px */
+    /* border-top: 1px solid #e5e7eb; /* gray-200 */
+}
+
+/* Ensure the main content area allows the input bar to be sticky */
+#main-content-area {
+    display: flex;
+    flex-direction: column;
+    position: relative; /* For z-index stacking context if needed */
+    z-index: 10; /* Below header, sidebar, overlay */
+    transition: margin-left 0.3s ease-in-out; /* For potential future pinned sidebar */
+}
+
+.view-section {
+    flex-grow: 1; /* Allows content to push input bar down */
+}
+
+/* Styling for dynamically generated result cards */
+.result-card {
+    background-color: white;
+    padding: 1.25rem; /* p-5 */
+    border-radius: 0.5rem; /* rounded-lg */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+    border: 1px solid #e5e7eb; /* border-gray-200 */
+}
+
+.result-card h3 {
+    font-size: 1.25rem; /* text-xl */
+    font-weight: 600; /* font-semibold */
+    color: #7E22CE; /* purple-700 */
+}
+
+.result-card .confidence-tag {
+    font-size: 0.875rem; /* text-sm */
+    font-weight: 500; /* font-medium */
+    background-color: #D1FAE5; /* green-100 */
+    color: #065F46; /* green-700 */
+    padding-left: 0.625rem; /* px-2.5 */
+    padding-right: 0.625rem;
+    padding-top: 0.125rem; /* py-0.5 */
+    padding-bottom: 0.125rem;
+    border-radius: 9999px; /* rounded-full */
+}
+
+.result-card .explanation-text {
+    font-size: 0.875rem; /* text-sm */
+    color: #4B5563; /* gray-600 */
+    margin-top: 0.5rem; /* mt-2 */
+    font-weight: 300; /* light */
+}
+
+.result-card .disclaimer-text {
+    font-size: 0.75rem; /* text-xs */
+    color: #EF4444; /* red-500 */
+    margin-top: 0.75rem; /* mt-3 */
+    font-weight: 400; /* normal */
+}
+
+/* Input field custom styles */
+.search-input-custom, .symptom-input-custom {
+    background-color: #F9FAFB; /* gray-50 */
+    border-color: #E5E7EB; /* gray-200 */
+    transition: all 0.2s ease-in-out;
+    font-weight: 400; /* normal */
+}
+.search-input-custom::placeholder, .symptom-input-custom::placeholder {
+    color: #9CA3AF; /* gray-400 */
+    font-weight: 300; /* light */
+}
+.search-input-custom:focus, .symptom-input-custom:focus {
+    background-color: white;
+    border-color: #A78BFA; /* purple-400 */
+    box-shadow: 0 0 0 2px rgba(196, 181, 253, 0.3); /* ring-purple-300 with opacity */
+}
+
+/* Send button custom styles */
+.send-button-custom {
+    background-color: #1F2937; /* gray-800 */
+    box-shadow: 0 4px 10px rgba(31, 41, 55, 0.2), 0 2px 4px rgba(31, 41, 55, 0.1);
+    transition: all 0.2s ease-in-out;
+}
+.send-button-custom:hover {
+    background-color: #111827; /* gray-900 */
+    box-shadow: 0 6px 15px rgba(31, 41, 55, 0.25), 0 3px 6px rgba(31, 41, 55, 0.15);
+    transform: translateY(-1px);
+}
+.send-button-custom:active {
+    transform: translateY(0px);
+    box-shadow: 0 2px 5px rgba(31, 41, 55, 0.15);
+}
+
+/* Adjusting text weights for specific elements as per Valerio.ai */
+#top-bar .text-gray-700 { font-weight: 500; } /* Top bar texts */
+#top-bar .text-gray-500 { font-weight: 300; } /* Top bar email */
+
+.sidebar-link { font-weight: 400; } /* Sidebar links default */
+.sidebar-link.active-link { font-weight: 500; } /* Active sidebar link */
+.sidebar-link svg { stroke-width: 1.5; } /* Thinner icons by default */
+.sidebar-link.active-link svg { stroke-width: 2; } /* Slightly bolder active icon */
+
+h3.uppercase { font-weight: 500; letter-spacing: 0.05em; } /* RECENT CHECKS heading */
+.text-gray-600 { font-weight: 400; } /* Default for gray-600 text */
+
+#initial-view h1.gradient-text { font-weight: 700; } /* Hello User */
+#initial-view p.text-gray-400 { font-weight: 300; } /* How are you feeling */
+
+#output-area h2 { font-weight: 600; } /* Potential Conditions */
+#no-results-message .text-lg { font-weight: 500; }
+#no-results-message .text-sm { font-weight: 300; }
+
+#footer-text { font-weight: 300; }
+
+/* Universally Collapsible Sidebar Styles */
+/* The transform is handled by adding/removing -translate-x-full and translate-x-0 in JS/HTML */
+#left-sidebar.sidebar-open {
+    /* transform: translateX(0); /* This is now handled by Tailwind classes toggled by JS */
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.15); /* Shadow for the overlay sidebar */
+}
+
+/* Ensure the close button inside the sidebar is styled appropriately */
+#close-sidebar-button {
+    /* Tailwind classes are mostly handling this, but can add specifics if needed */
+}
+
+/* ==========================================================================
+   Authentication UI Styles
+   ========================================================================== */
+
+/*
+   Most authentication UI styling (buttons, user info, avatar) is handled
+   by Tailwind CSS classes applied directly in script.js when these
+   elements are dynamically created. This provides consistency with the
+   rest of the application's styling.
+
+   This section is reserved for any specific overrides or more complex
+   styles related to authentication elements that cannot be easily
+   achieved with Tailwind utility classes alone, or if a global
+   adjustment is preferred over modifying the JavaScript.
+*/
+
+/* Example: Styling for the auth container itself, if needed beyond flex utilities */
+#auth-container {
+    /* min-width: 150px; /* Example: ensure a minimum width if content varies a lot */
+    /* justify-content: flex-end; /* Ensure items are pushed to the right if container grows */
+}
+
+/* Example: Further customization for the Google login button's SVG icon */
+#login-google-button svg {
+    /* Tailwind's w-5 h-5 classes are used in JS. Add overrides here if needed. */
+    /* For instance, if you wanted to ensure the fill color is consistent: */
+    /* fill: #FFFFFF; /* Assuming button text is white */
+}
+
+/*
+   Tailwind's focus ring utilities (e.g., focus:ring-2, focus:ring-purple-500)
+   are already applied in JavaScript for buttons, ensuring good accessibility.
+   If more specific focus-visible styling is desired:
+
+   #login-google-button:focus-visible,
+   #logout-button:focus-visible {
+       outline: 2px solid #A855F7; // purple-500
+       outline-offset: 2px;
+       box-shadow: none; // Override Tailwind rings if using custom outline
+   }
+*/
